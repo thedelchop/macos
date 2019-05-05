@@ -1,25 +1,18 @@
 [alias]
-  ad = add . -A
-  co = commit
-  com = commit -m
+  co = checkout
+  ci = commit
   st = status
-
+  br = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(align:120,left)%(color:"#F1FA8C")%(refname:short)%(color:reset)%(end)%(align:15,left)%(color:"#BD93F9")%(objectname:short)%(color:reset)%(end) %(align:85,left)%(contents:subject)%(end)%(align:38,left)%(color:"#F1FA8C")[%(authorname)]%(color:reset)%(end) %(align:15,left)%(color:"#FF79C6")%(committerdate:relative)%(color:reset)%(end)'
+  hist = log --graph --pretty=format:'%C("#6272A4")%h%C(auto) %C("#BD93F9")%ad%C(auto) %C("#F1FA8C")%<(18)%an%C(auto)%<(50,trunc)%s%d' --date=format:'%m/%d/%y'
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   logg = log --oneline --format=\"%h %an %s\" --stat
   today = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
-  unk = ls-files . --ignored --exclude-standard --others
-  unt = ls-files . --exclude-standard --others
   undo = reset --hard
   br = branch
   up = pull
   graph = log --graph --oneline --all
-  sst = submodule status
-  sup = submodule update
-  sin = submodule update
   ru = remote update
   ra = remote add
-  st-pull = "!f() { git subtree pull --squash --prefix ${1:-'missing-prefix'} ${2:-'missing-remote'} ${3:-'missing-refspec'}; }; f"
-  st-push = "!f() { git subtree push --prefix ${1:-'missing-prefix'} ${2:-'missing-remote'} ${3:-'missing-refspec'}; }; f"
   stage = add
   p = push
   s = status
@@ -28,8 +21,14 @@
 [http]
   postBuffer = 52428800
 [core]
-  autocrlf = false
+  autocrlf = input
+  safecrlf = false
+  editor = "nvim"
+  excludesfile = "~/.gitignore"
 [color]
   ui = true
+  diff = auto
+  status = auto
+  branch = auto
 [push]
-  default = simple
+  default = current
